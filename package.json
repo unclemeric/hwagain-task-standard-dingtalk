@@ -1,0 +1,41 @@
+{
+  "name": "hwagain-task-standard-dingtalk",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dingtalk-jsapi": "^2.6.13",
+    "fastclick": "^1.0.6",
+    "lib-flexible": "^0.3.2",
+    "qrcodejs2": "^0.0.2",
+    "register-service-worker": "^1.5.2",
+    "vant": "^1.5.9",
+    "vue": "^2.5.22",
+    "vue-element-loading": "^1.1.1",
+    "vue-router": "^3.0.1",
+    "vuet": "^1.0.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-pwa": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "babel-preset-es2015": "^6.24.1",
+    "compression-webpack-plugin": "^2.0.0",
+    "eslint": "^5.14.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-bundle-analyzer": "^3.0.4"
+  }
+}
