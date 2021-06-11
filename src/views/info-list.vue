@@ -1,7 +1,7 @@
 <template>
-  <div class="app-box">
+  <div class="app-box" v-loading="isLoading">
     <ul class="task-list">
-      <li style="background: #e6e6e6;">
+      <li style="background: #e6e6e6;height: 40px;">
         <div class="item-index">序号</div>
         <div class="item-title" style="justify-content: center;">文件名称</div>
         <div class="item-operation">操作</div>
@@ -29,18 +29,29 @@ import request from '@/utils/httpUtil'
 export default {
   data() {
     return {
+      isLoading: false,
       taskList: []
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    if (['100', '200'].includes(to.query.type)) {
+      next()
+    } else {
+      next('/')
     }
   },
   methods: {
     viewImage(data) {
-      console.log(this.$vuet.store)
       this.$vuet.modules.home.setFileData(data)
       this.$router.push('/image-view')
     },
     getList() {
+      let params = {
+        standardType: this.$route.query.type
+      }
+      this.isLoading = true
       request
-        .get(this.$api.TaskStandardList)
+        .get(this.$api.TaskStandardList, { params })
         .then(res => {
           this.isLoading = false
           if (res.data && res.data.success === true) {
@@ -58,7 +69,8 @@ export default {
     this.getList()
     DingTalkApi.ui.webViewBounce.disable()
     DingTalkApi.biz.navigation.setTitle({
-      title: this.$route.name
+      title:
+        this.$route.query.type === '100' ? '作业标准查看' : this.$route.query.type === '200' ? '病虫草害参考手册' : ''
     })
   }
 }
@@ -77,19 +89,19 @@ export default {
     li {
       display: flex;
       flex-direction: row;
-      min-height: 42px;
-      border-bottom: 1px solid #ccc;
+      // min-height: 42px;
+      border-bottom: 1px solid #ececec;
       div {
         font-size: 14px;
         display: inline-block;
-        padding: 8px 10px;
+        padding: 5px 10px;
         justify-content: center;
         align-items: center;
         display: flex;
         &.item-index {
           width: 50px;
           text-align: center;
-          border-right: 1px solid #ccc;
+          border-right: 1px solid #ececec;
         }
         &.item-operation {
           width: 50px;
@@ -98,8 +110,8 @@ export default {
         &.item-title {
           white-space: normal;
           text-align: left;
-          border-right: 1px solid #ccc;
-          padding: 0 5px;
+          border-right: 1px solid #ececec;
+          padding: 5px;
           justify-content: left;
           overflow: hidden;
           text-overflow: ellipsis;

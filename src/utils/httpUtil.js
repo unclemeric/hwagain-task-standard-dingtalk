@@ -16,10 +16,7 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     if (config.url !== API.DINGTALK_USERID) {
-      config.headers.common['Authorization'] =
-        vuet.modules.home.token ||
-        vuet.modules.home._LOGINUSER_.token ||
-        'eyJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiJBMjAyNDk0IiwidXNlcm5hbWUiOiLotZbkuInlj5EiLCJleHAiOjE2MjA0MDg4OTR9.kIflxUIZS0LUvFxEbW-wCIOahxqyDcksKmk1Vi-FOQOoI2sAzP4Hf1elD42Z4l6mOA5760K37CsEefb6OhmReRnPU9XDbKDAM8tvLzWn1nEur3SQ2Ioa1NHa5l3KahaxVHWEPPhL1fpsK5LSzJCAtCT5JxBT48joW-UuBodyl1E'
+      config.headers.common['Authorization'] = vuet.modules.home.token || vuet.modules.home._LOGINUSER_.token
     }
     // config.headers.common['Authorization'] =
     //   'eyJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiJBMjAyNDk0IiwidXNlcm5hbWUiOiLotZbkuInlj5EiLCJleHAiOjE2MTM4NTA0MDR9.ImmQ9VOsTexTjeaMjevCHlZrs2vQ8q0R6jSFeRRs4WKftazJtFUkYGlp9xZegBgHoCcASRTUltyXW0e2P_tSeeOhdfhxQBB6UiAzWSuDDL8oMcoM-qYxo5w-FegMG3HPDoEjfT-v6Vz9z-4sGMFvLNJ8162jIbiS8x1gmTSHXlY'

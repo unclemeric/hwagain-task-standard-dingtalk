@@ -8,23 +8,20 @@ export default new Router({
     {
       path: '/',
       name: '文件目录',
-      hidden: true,
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "home" */ '@/views/home'),
+      component: () => import(/* webpackChunkName: "home" */ '@/views/index'),
       meta: {
         keepAlive: true
       }
     },
     {
+      path: '/info-list',
+      name: '目录',
+      component: () => import(/* webpackChunkName: "info-list" */ '@/views/info-list')
+    },
+    {
       path: '/image-view',
       name: '标准作业查看',
-      meta: {
-        state: 0,
-        background: '#18bb4a'
-      },
-      component: () => import(/* webpackChunkName: "image-view" */ '@/views/home/image-view')
+      component: () => import(/* webpackChunkName: "image-view" */ '@/views/image-view')
     }
   ],
   scrollBehavior(to, from, savedPosition) {
