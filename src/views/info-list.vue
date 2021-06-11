@@ -1,5 +1,13 @@
 <template>
-  <div class="app-box" v-loading="isLoading">
+  <div class="app-box">
+    <vue-element-loading
+      :active="isLoading"
+      color="#0099ff"
+      is-full-screen
+      :text-style="{ fontSize: '.36rem' }"
+      spinner="spinner"
+      :text="'加载中'"
+    />
     <ul class="task-list">
       <li style="background: #e6e6e6;height: 40px;">
         <div class="item-index">序号</div>
