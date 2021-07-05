@@ -5,6 +5,7 @@
         v-if="fileData.files && fileData.files.length > currIndex"
         :src="fileData.files[currIndex].filePath"
         style="width: 100%"
+        @click="viewImage(currIndex)"
         @load="callBtnEnabled"
       />
     </div>
@@ -39,7 +40,8 @@ export default {
     return {
       isDisabled: true,
       fileData: { files: [] },
-      currIndex: 0
+      currIndex: 0,
+      images: []
     }
   },
   watch: {
@@ -53,6 +55,16 @@ export default {
     }
   },
   methods: {
+    viewImage(index) {
+      dd.biz.util.previewImage({
+        urls: this.images, // 图片地址列表
+        current: this.images[index], // 当前显示的图片链接
+        onSuccess: function(result) {
+          /**/
+        },
+        onFail: function(err) {}
+      })
+    },
     callBtnEnabled() {
       this.isDisabled = false
     }
@@ -62,6 +74,7 @@ export default {
   },
   mounted() {
     this.fileData = this.$vuet.store.home.fileData
+    this.images = (this.fileData.files || []).map(it => it.filePath)
     if (!this.fileData || !this.fileData.files) {
       this.$router.back()
     }

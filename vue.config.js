@@ -15,8 +15,8 @@ const resolve = function(dir) {
 module.exports = {
   outputDir: process.env.outputDir || 'dist', // 'dist', 生产环境构建文件的目录
   assetsDir: '', // 相对于outputDir的静态资源(js、css、img、fonts)目录
-  // publicPath: process.env.NODE_ENV === 'production' ? '/hwagain-dingtalk-oa/task-standard/' : '/',
-  publicPath: process.env.NODE_ENV === 'production' ? '/hwagain-dingtalk-oa-test/task-standard/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/hwagain-dingtalk-oa/task-standard/' : '/',
+  // publicPath: process.env.NODE_ENV === 'production' ? '/hwagain-dingtalk-oa-test/task-standard/' : '/',
   // publicPath: '/',
   lintOnSave: true,
   // runtimeCompiler: true,
