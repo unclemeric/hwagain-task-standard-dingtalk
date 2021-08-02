@@ -8,6 +8,23 @@
       spinner="spinner"
       :text="'加载中'"
     />
+    <div class="search-box">
+      <div class="row-box">
+        <div class="form-item">
+          <div
+            style="display: flex;align-items: center;justify-content: space-between;padding: 5px 10px;box-sizing:border-box;"
+          >
+            <input
+              type="text"
+              placeholder="关键字搜索"
+              style="flex:1;height: 26px;border-radius: 3px;border: 1px solid #ccc;padding: 3px 10px;outline:none;"
+              v-model="keywords"
+            />
+            <!-- <button class="search-btn" @click="doSearch">查询</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
     <ul class="task-list">
       <li style="background: #e6e6e6;height: 40px;">
         <div class="item-index">序号</div>
@@ -38,7 +55,9 @@ export default {
   data() {
     return {
       isLoading: false,
-      taskList: []
+      taskList: [],
+      taskListOrigin: '',
+      keywords: ''
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -48,7 +67,21 @@ export default {
       next('/')
     }
   },
+  watch: {
+    keywords() {
+      this.doSearch()
+    }
+  },
   methods: {
+    doSearch() {
+      let json = JSON.parse(this.taskListOrigin)
+      if (this.keywords) {
+        let result = json.filter(it => it.folderName.includes(this.keywords))
+        this.taskList = result
+      } else {
+        this.taskList = json
+      }
+    },
     viewImage(data) {
       this.$vuet.modules.home.setFileData(data)
       this.$router.push('/image-view')
@@ -63,6 +96,7 @@ export default {
         .then(res => {
           this.isLoading = false
           if (res.data && res.data.success === true) {
+            this.taskListOrigin = JSON.stringify(res.data.data || [])
             this.taskList = res.data.data || []
           } else {
             this.taskList = []
@@ -85,11 +119,33 @@ export default {
 </script>
 
 <style lang="less" scoped>
+input,
+button {
+  // border: none;
+  outline: none;
+  // border-radius: initial;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
 .app-box {
   height: 100vh;
   width: 100%;
   background: #fff;
   overflow: auto;
+  // .search-btn {
+  //   padding: 6px 10px;
+  //   border: none;
+  //   background: #0099ff;
+  //   color: #fff;
+  //   width: 100px;
+  //   border-radius: 3px;
+  //   margin-left: 15px;
+  //   &:active {
+  //     opacity: 0.8;
+  //   }
+  // }
   .task-list {
     list-style: none;
     margin: 0;
